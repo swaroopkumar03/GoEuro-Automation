@@ -1,0 +1,11 @@
+<suite name="TestAutomation" parallel="none">
+    <test name="SearchTest">
+        <parameter name="FromCity" value="berlin"/>
+        <parameter name="ToCity" value="prague"/>
+        <parameter name="url" value="http://www.goeuro.es/"/>
+        <classes>
+            <class name="scripts.SearchTest"/>
+            <class name="scripts.SearchResultsTest"/>
+        </classes>
+    </test>
+</suite>
