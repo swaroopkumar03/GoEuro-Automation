@@ -1,0 +1,27 @@
+# GoEuro-Automation
+This is the assignment project
+This framework is called Page Object Model (POM), this is a maven project
+
+Basically this framework will have two packages:
+1. pom
+2. scripts
+
+1. pom
+    i. In pom package there will be different classes based on different pages
+    ii. And in each class there will be objects on that respective pages
+    iii. There will be methods in that pages on what task they have to perform
+    
+2. scripts
+    i. In scripts package there will be BaseTest.java class that will invoke the driver
+    ii. There will be other different classes which will drive the tests for each pages
+
+How to run the project
+    1. Pre-requisites:
+        a. Maven is configures in the system
+        b. Mozilla Firefox is installed in the system, firefox version 47.0.1
+     2. Use any of these below commands to run the project
+        a. mvn clean install
+        b. mvn test
+
+Test Report:
+1. Once the test run is complete, there will be report "Report.html" generated in the project 
