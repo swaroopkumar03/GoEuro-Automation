@@ -21,7 +21,6 @@ public class SearchResultsTest extends BaseTest {
         searchResultsPage.verifyFlightPriceSort();
     }
 
-
     @Test(priority = 3)
     public void verifyPriceForBus(){
         searchResultsPage.verifyBusPriceSort();

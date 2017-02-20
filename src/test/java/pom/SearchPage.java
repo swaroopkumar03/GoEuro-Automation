@@ -37,11 +37,9 @@ public class SearchPage extends BasePage {
             dateField.click();
             Thread.sleep(5000);
             searchButton.click();
-           LoggingValidation.logger = LoggingValidation.report.startTest("Search Test");
+            LoggingValidation.logger = LoggingValidation.report.startTest("Search Test");
             LoggingValidation loggingValidation = new LoggingValidation();
-
             loggingValidation.logger.log(LogStatus.PASS,"Search Test is succcessful");
-
             loggingValidation.report.endTest(LoggingValidation.logger);
             loggingValidation.report.flush();
         }

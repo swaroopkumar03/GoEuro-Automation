@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Reporter;
 import scripts.LoggingValidation;
 
 import java.util.ArrayList;
@@ -36,28 +37,26 @@ public class SearchResultsPage extends BasePage {
     public void priceSortVerification(String mode) {
         for (int i = 0; i < priceLink.size(); i++) {
             priceSortLink.click();
-            String v = priceLink.get(i).getText().replace("€", "").replace(",", ".");
-            Double d = Double.parseDouble(v);
-            sortedPrices.add(d);
-            actualPrices.add(d);
+            String replaceSpecialCharsInPrice = priceLink.get(i).getText().replace("€", "").replace(",", ".");
+            Double priceStringToDouble = Double.parseDouble(replaceSpecialCharsInPrice);
+            sortedPrices.add(priceStringToDouble);
+            actualPrices.add(priceStringToDouble);
         }
-        System.out.println("Number of prices displayed for " +mode + ": " +actualPrices.size());
+        Reporter.log("Number of prices displayed for " +mode + ": " +actualPrices.size());
         boolean priceSortComparisonResult = priceCheck();
         if(priceSortComparisonResult == true){
-            System.out.println(mode + " Prices are sorted");
-            LoggingValidation.logger = LoggingValidation.report.startTest("verifyPriceSort");
-            LoggingValidation loggingValidation = new LoggingValidation();
+            Reporter.log(mode + " Prices are sorted");
+            LoggingValidation.logger = LoggingValidation.report.startTest("Verify Price Sort for : " +mode);
             LoggingValidation.logger.log(LogStatus.PASS, mode+" Price Sorted");
             LoggingValidation.report.endTest(LoggingValidation.logger);
             LoggingValidation.report.flush();
         }
         else{
-            LoggingValidation.logger = LoggingValidation.report.startTest("verifyPriceSort");
-            LoggingValidation loggingValidation = new LoggingValidation();
+            LoggingValidation.logger = LoggingValidation.report.startTest("Verify Price Sort : " +mode);
             LoggingValidation.logger.log(LogStatus.FAIL, mode+"  Price  not Sorted");
             LoggingValidation.report.endTest(LoggingValidation.logger);
             LoggingValidation.report.flush();
-            System.out.println(mode+ " Prices are not sorted");
+            Reporter.log(mode+ " Prices are not sorted");
     }
         sortedPrices.clear();
         actualPrices.clear();
