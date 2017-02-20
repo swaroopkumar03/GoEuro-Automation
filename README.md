@@ -24,4 +24,12 @@ How to run the project
         b. mvn test
 
 Test Report:
-1. Once the test run is complete, there will be report "Report.html" generated in the project 
+1. Once the test run is complete, there will be report "Report.html" generated in the project
+2. Report contains the details like:
+    i. Which tests run
+    ii. Status of the test
+    iii. Time stamp
+    iv. Graphical representation of the test result
+    v. Start and End time of the complete test run
+    vi. Pass percentage
+    vii. Environment
