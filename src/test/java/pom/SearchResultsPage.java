@@ -6,11 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Reporter;
-import scripts.LoggingValidation;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static scripts.LoggingValidation.logger;
+import static scripts.LoggingValidation.report;
 
 /**
  * Created by skumar on 2/17/17.
@@ -29,33 +31,33 @@ public class SearchResultsPage extends BasePage {
     private WebElement priceSortLink;
 
     @FindBy(xpath = "//div/span[@data-test='price']")
-    private List<WebElement> priceLink;
+    private List<WebElement> listOfPrices;
 
     @FindBy(xpath = "//div[@class='ResultTabs__tabIcon___wMm0I']")
-    private List<WebElement> productLinks;
+    private List<WebElement> listOfProducts;
 
     public void priceSortVerification(String mode) {
-        for (int i = 0; i < priceLink.size(); i++) {
+        for (int i = 0; i < listOfPrices.size(); i++) {
             priceSortLink.click();
-            String replaceSpecialCharsInPrice = priceLink.get(i).getText().replace("€", "").replace(",", ".");
+            String replaceSpecialCharsInPrice = listOfPrices.get(i).getText().replace("€", "").replace(",", ".");
             Double priceStringToDouble = Double.parseDouble(replaceSpecialCharsInPrice);
             sortedPrices.add(priceStringToDouble);
             actualPrices.add(priceStringToDouble);
         }
-        Reporter.log("Number of prices displayed for " +mode + ": " +actualPrices.size());
+        Reporter.log("Number of prices displayed for " + mode + ": " +actualPrices.size());
         boolean priceSortComparisonResult = priceCheck();
         if(priceSortComparisonResult == true){
             Reporter.log(mode + " Prices are sorted");
-            LoggingValidation.logger = LoggingValidation.report.startTest("Verify Price Sort for : " +mode);
-            LoggingValidation.logger.log(LogStatus.PASS, mode+" Price Sorted");
-            LoggingValidation.report.endTest(LoggingValidation.logger);
-            LoggingValidation.report.flush();
+            logger = report.startTest("Verify Price Sort for : " +mode);
+            logger.log(LogStatus.PASS, mode+" Price Sorted");
+            report.endTest(logger);
+            report.flush();
         }
         else{
-            LoggingValidation.logger = LoggingValidation.report.startTest("Verify Price Sort : " +mode);
-            LoggingValidation.logger.log(LogStatus.FAIL, mode+"  Price  not Sorted");
-            LoggingValidation.report.endTest(LoggingValidation.logger);
-            LoggingValidation.report.flush();
+            logger = report.startTest("Verify Price Sort : " +mode);
+            logger.log(LogStatus.FAIL, mode+"  Price  not Sorted");
+            report.endTest(logger);
+            report.flush();
             Reporter.log(mode+ " Prices are not sorted");
     }
         sortedPrices.clear();
@@ -72,17 +74,17 @@ public class SearchResultsPage extends BasePage {
     }
 
     public void verifyTrainPriceSort(){
-        productLinks.get(0).click();
+        listOfProducts.get(0).click();
             priceSortVerification("Train");
     }
 
     public void verifyFlightPriceSort(){
-        productLinks.get(1).click();
+        listOfProducts.get(1).click();
         priceSortVerification("Flight");
     }
 
     public void verifyBusPriceSort(){
-        productLinks.get(2).click();
+        listOfProducts.get(2).click();
         priceSortVerification("Bus");
     }
 

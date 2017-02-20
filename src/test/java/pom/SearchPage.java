@@ -4,7 +4,8 @@ import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import scripts.LoggingValidation;
+
+import static scripts.LoggingValidation.writeToReportLogging;
 
 /**
  * Created by skumar on 2/16/17.
@@ -35,16 +36,13 @@ public class SearchPage extends BasePage {
             fromSearchField.sendKeys(from);
             toSearchField.sendKeys(to);
             dateField.click();
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             searchButton.click();
-            LoggingValidation.logger = LoggingValidation.report.startTest("Search Test");
-            LoggingValidation loggingValidation = new LoggingValidation();
-            loggingValidation.logger.log(LogStatus.PASS,"Search Test is succcessful");
-            loggingValidation.report.endTest(LoggingValidation.logger);
-            loggingValidation.report.flush();
+            writeToReportLogging("Search Test", LogStatus.PASS,"Search Test is succcessful");
+
         }
         catch(Exception e){
-            LoggingValidation.logger.log(LogStatus.FAIL, "Search test fail" +e.getMessage().toString());
+            writeToReportLogging("Search Test", LogStatus.FAIL,e.getMessage().toString());
         }
     }
 
