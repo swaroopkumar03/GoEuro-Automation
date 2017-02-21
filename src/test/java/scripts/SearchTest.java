@@ -13,18 +13,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class SearchTest extends BaseTest {
 
-    SearchPage searchPage;
+    private SearchPage searchPage;
 
-    @Parameters({"FromCity","ToCity"})
+    @Parameters({"FromCity", "ToCity"})
     @Test(priority = 1)
-    public void searchTest(@Optional("berlin") String from, @Optional("prague") String to){
+    public void searchTest(@Optional("berlin") String from, @Optional("prague") String to) {
         searchPage = new SearchPage(driver);
-        searchPage.search(from,to);
+        searchPage.search(from, to);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Set<String> window = driver.getWindowHandles();
-        for(String a : window) {
-            driver.switchTo().window(a);
+        for (String windowHandle : window) {
+            driver.switchTo().window(windowHandle);
         }
-
     }
 }

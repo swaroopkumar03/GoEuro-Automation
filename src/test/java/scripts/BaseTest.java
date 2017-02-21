@@ -13,19 +13,16 @@ import org.testng.annotations.Parameters;
 public class BaseTest {
 
     public static WebDriver driver;
-    //public static ExtentReports extentReports;
-    //LoggingValidation loggingValidation;
 
     @Parameters({"url"})
     @BeforeTest
-    public void preCondition(@Optional("http://www.goeuro.es/") String url)
-    {
-        driver=new FirefoxDriver();
+    public void preCondition(@Optional("http://www.goeuro.es/") String url) {
+        driver = new FirefoxDriver();
         driver.get(url);
     }
 
     @AfterTest
-    public void postCondition(){
+    public void postCondition() {
         driver.quit();
     }
 

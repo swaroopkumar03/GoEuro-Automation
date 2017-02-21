@@ -11,18 +11,18 @@ public class SearchResultsTest extends BaseTest {
     SearchResultsPage searchResultsPage;
 
     @Test(priority = 1)
-    public void verifyPriceForTrain() throws Exception{
+    public void verifyPriceSortForTrain() throws Exception {
         searchResultsPage = new SearchResultsPage(driver);
         searchResultsPage.verifyTrainPriceSort();
     }
 
     @Test(priority = 2)
-    public void verifyPriceForFlight(){
+    public void verifyPriceSortForFlight() {
         searchResultsPage.verifyFlightPriceSort();
     }
 
     @Test(priority = 3)
-    public void verifyPriceForBus(){
+    public void verifyPriceSortForBus() {
         searchResultsPage.verifyBusPriceSort();
     }
 }

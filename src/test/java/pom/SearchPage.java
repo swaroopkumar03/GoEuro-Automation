@@ -12,40 +12,34 @@ import static scripts.LoggingValidation.writeToReportLogging;
  */
 public class SearchPage extends BasePage {
 
-    public SearchPage(WebDriver driver){
+    @FindBy(xpath = "(//input[@id='$city'])[1]")
+    private WebElement departureCity;
+    @FindBy(xpath = "(//input[@id='$city'])[2]")
+    private WebElement arrivalCity;
+    @FindBy(xpath = "//div[@class='sb-field']")
+    private WebElement dateField;
+    @FindBy(xpath = "//td[@data-year]/a[.='25']")
+    private WebElement selectDate;
+    @FindBy(xpath = "//button[@id='dLsbSubmit']")
+    private WebElement searchButton;
+
+    public SearchPage(WebDriver driver) {
         super(driver);
     }
 
-    @FindBy(xpath = "//input[@id='from_filter']")
-    private WebElement fromSearchField;
-
-    @FindBy(xpath = "//input[@id='to_filter']")
-    private WebElement toSearchField;
-
-    @FindBy(xpath = "//input[@id='departure_date']")
-    private WebElement dateField;
-
-    @FindBy(xpath ="//input[@id='search-form__submit-btn']")
-    private WebElement searchButton;
-
-    @FindBy(xpath = "//td[@data-year]/a[.='25']")
-    private WebElement selectDate;
-
-    public void search(String from, String to){
+    public void search(String from, String to) {
         try {
-            fromSearchField.sendKeys(from);
-            toSearchField.sendKeys(to);
+            departureCity.sendKeys(from);
+            Thread.sleep(2000);
+            arrivalCity.sendKeys(to);
+            Thread.sleep(2000);
             dateField.click();
             Thread.sleep(3000);
             searchButton.click();
-            writeToReportLogging("Search Test", LogStatus.PASS,"Search Test is succcessful");
+            writeToReportLogging("Search Test", LogStatus.PASS, "Search Test is succcessful");
 
-        }
-        catch(Exception e){
-            writeToReportLogging("Search Test", LogStatus.FAIL,e.getMessage().toString());
+        } catch (Exception e) {
+            writeToReportLogging("Search Test", LogStatus.FAIL, e.getMessage());
         }
     }
-
-
-
 }
