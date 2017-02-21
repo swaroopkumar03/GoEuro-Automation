@@ -17,14 +17,15 @@ Basically this framework will have two packages:
 
 How to run the project
     1. Pre-requisites:
-        a. Maven is configures in the system
+        a. Maven is configured in the system
         b. Mozilla Firefox is installed in the system, firefox version 47.0.1
      2. Use any of these below commands to run the project
         a. mvn clean install
         b. mvn test
+        3. Right click on the testng.xml and select run
 
 Test Report:
-1. Once the test run is complete, there will be report "Report.html" generated in the project
+1. Once the test run is complete, there will be report "Report.html" generated under /src folder
 2. Report contains the details like:
     i. Which tests run
     ii. Status of the test
